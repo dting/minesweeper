@@ -1,0 +1,218 @@
+@import "./styles/fonts",
+        "./styles/mixins",
+        "./styles/variables";
+
+* {
+  box-sizing : border-box;
+}
+
+body {
+  width            : 100vw;
+  height           : 100vh;
+  background-color : $gray;
+}
+
+.app {
+  display        : flex;
+  align-items    : center;
+  flex-direction : column;
+}
+
+.settings {
+  display : flex;
+  margin  : 5px;
+
+  .sliders {
+    display        : flex;
+    flex           : 1;
+    flex-direction : column;
+
+    .slider-group {
+      display         : flex;
+      align-items     : center;
+      justify-content : center;
+    }
+
+    .slider {
+      margin : 5px 10px;
+    }
+  }
+}
+
+.game {
+  padding          : 10px;
+  border           : $popout;
+  background-color : $gray;
+}
+
+.header {
+  display         : flex;
+  margin-bottom   : 10px;
+  border          : $sinkin;
+  background      : $gray;
+  align-items     : center;
+  justify-content : center;
+
+  .reset-button {
+    display         : flex;
+    width           : 40px;
+    height          : 40px;
+    margin          : 5px 0;
+    padding         : 0;
+    border          : $popout;
+    outline         : none;
+    align-items     : center;
+    justify-content : center;
+    cursor          : pointer;
+
+    &:active {
+      border : $sinkin;
+    }
+
+    .stack {
+      display         : flex;
+      position        : relative;
+      width           : 34px;
+      height          : 34px;
+      align-items     : center;
+      justify-content : center;
+    }
+
+    i {
+      position : absolute;
+      margin   : 0;
+      padding  : 0;
+
+      &.fa-circle {
+        color : yellow;
+      }
+    }
+  }
+
+  .spacer {
+    flex : 1;
+  }
+
+  .flagCountdown,
+  .timer {
+    height         : 40px;
+    margin         : 5px;
+    padding        : 0 3px;
+    color          : red;
+    background     : black;
+    text-align     : center;
+    vertical-align : middle;
+    font-family    : 'LCD14',
+                     monospace;
+    font-size      : 30px;
+    line-height    : 35px;
+    user-select    : none;
+  }
+}
+
+.board {
+  display        : flex;
+  border         : $sinkin;
+  align-items    : center;
+  flex-direction : column;
+}
+
+.row {
+  display     : flex;
+  align-items : center;
+}
+
+.cell {
+  display         : flex;
+  width           : $size;
+  height          : $size;
+  padding         : 0;
+  border          : none;
+  background-size : $size $size;
+  outline         : none;
+  align-items     : center;
+  font-family     : monospace;
+  font-size       : 14px;
+  font-weight     : 700;
+  justify-content : center;
+
+  i.e:before,
+  i.m:before {
+    @include icon(bomb);
+  }
+
+  i.f {
+    display      : inline-block;
+    position     : relative;
+    width        : 11px;
+    height       : 10px;
+    margin-left  : -7px;
+    border-right : 1px solid black;
+
+    &:before {
+      content       : '';
+      position      : absolute;
+      right         : -4px;
+      width         : 8px;
+      height        : 10px;
+      border-bottom : 2px solid black;
+    }
+
+    &:after {
+      content             : '';
+      position            : absolute;
+      top                 : -5px;
+      left                : -1px;
+      width               : 0;
+      height              : 0;
+      color               : red;
+      border-top-color    : transparent;
+      border-bottom-color : transparent;
+      border-width        : 8px 0 8px 16px;
+      border-style        : solid;
+      transform           : scale(-0.45);
+    }
+  }
+
+  &.s {
+    border           : $popout2;
+    background-color : $gray;
+
+    &:active {
+      border : $sinkin1;
+    }
+  }
+
+  &.sp {
+    border           : $sinkin;
+    background-color : darken($gray, 10%);
+  }
+
+  &.s0,
+  &.sm {
+    border           : $sinkin1;
+    background-color : darken($gray, 10%);
+  }
+
+  &.se {
+    border           : $sinkin1;
+    background-color : lighten(red, 15%);
+  }
+
+  &.sf {
+    border           : $popout2;
+    background-color : darken($gray, 10%);
+  }
+
+  @for $i from 1 to length($nums)+1 {
+    &.s#{$i} {
+      color            : nth($nums, $i);
+      border           : $sinkin1;
+      background-color : darken($gray, 10%);
+
+      &:after {
+        content : quote($i);
+      }
+    }
+  }
+}

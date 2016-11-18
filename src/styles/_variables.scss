@@ -1,0 +1,18 @@
+$nums: (blue,
+        green,
+        red,
+        darken(blue, 25%),
+        brown,
+        darken(cyan, 25%),
+        black,
+        darken(gray, 20%));
+
+$size: 20px;
+
+$gray: #c0c0c0;
+$light-gray : #eee;
+
+$popout: outset 3px $light-gray;
+$popout2: outset 2px $light-gray;
+$sinkin: inset 3px $light-gray;
+$sinkin1: inset 1px $gray;
